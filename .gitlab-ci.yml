@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  image: python:3.9
+  script:
+    - echo "Building the application..."
+    - python --version
+    - pip install --upgrade pip
+    - pip install -r requirements.txt || true # Handle optional file
+    - echo "Build complete."
+
+test:
+  stage: test
+  image: python:3.9
+  script:
+    - python --version
+    - pip install --upgrade pip
+    - pip install -r requirements.txt || true
+    - python -m unittest discover -s . -p "test*.py"
